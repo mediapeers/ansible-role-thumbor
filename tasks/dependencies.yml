@@ -1,3 +1,4 @@
+---
 # Installs all system dependencies for Thumbor (native libs, image manipulation tools)
 
 - name: Install supervisord, python and image libraries / thumbor dependencies

@@ -1,3 +1,4 @@
+---
 # Installs Thumbor and the AWS plugin, and configures thumbor and supervisord
 
 # tc_aws adds S3 storage support to thumbor see https://github.com/thumbor-community/aws

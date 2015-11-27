@@ -1,5 +1,5 @@
 ---
 # tasks file for ansible-role-thumbor
 
-include: dependencies.yml
-include: thumbor.yml
+- include: dependencies.yml
+- include: thumbor.yml
