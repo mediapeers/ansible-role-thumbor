@@ -1,11 +1,14 @@
 ---
 # Installs all system dependencies for Thumbor (native libs, image manipulation tools)
 
+- name: Update apt index
+  apt:
+    update_cache: yes
+
 - name: Install supervisord, python and image libraries / thumbor dependencies
   apt:
     name: "{{ item }}"
     state: latest
-    update_cache: yes
     with_items:
       - supervisor # used to supervise thumbor processes
       - python-pip # to get the pip package manager
