@@ -1,3 +1,5 @@
+Build status
+
 # Thumbor role
 Ansible role that installs (Thumbor)[https://github.com/thumbor/thumbor] and sets it up for production use. It uses supervisord to spawn mulitple Thumbor servper processes and puts 
 Nnginx infront of it to loadbalance between them and provide a robus webserver for access from outside.
