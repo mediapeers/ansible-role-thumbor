@@ -19,7 +19,8 @@ install:
   - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
 
   # Add role dependency (mpx.nginx)
-  - cd tests/roles && wget https://github.com/mediapeers/ansible-role-nginx/archive/master.zip && unzip master.zip
+  - cd tests/roles && wget https://github.com/mediapeers/ansible-role-nginx/archive/master.zip && unzip master.zip && cd -
+  - pwd
   - mv tests/roles/ansible-role-nginx tests/roles/mpx.nginx
 
 script:
