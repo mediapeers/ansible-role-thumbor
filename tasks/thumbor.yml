@@ -24,11 +24,11 @@
 
 - name: Copy thumbor config
   template:
-  src: thumbor.conf.j2
-  dest: "{{ thumbor_config_dir }}/thumbor.conf"
-  owner: root
-  group: "{{ thumbor_user }}"
-  mode: 0640
+    src: thumbor.conf.j2
+    dest: "{{ thumbor_config_dir }}/thumbor.conf"
+    owner: root
+    group: "{{ thumbor_user }}"
+    mode: 0640
 
 - name: Copy thumbor key
   template:
