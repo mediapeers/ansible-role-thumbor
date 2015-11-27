@@ -9,6 +9,7 @@ env:
 
 before_install:
   - sudo apt-get update -qq
+  - sudo apt-get install -y unzip
 
 install:
   # Install Ansible.
@@ -16,6 +17,10 @@ install:
 
   # Add ansible.cfg to pick up roles path.
   - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
+
+  # Add role dependency (mpx.nginx)
+  - cd tests/roles && wget https://github.com/mediapeers/ansible-role-nginx/archive/master.zip && unzip master.zip
+  - mv tests/roles/ansible-role-nginx tests/roles/mpx.nginx
 
 script:
   # Check the role/playbook's syntax.
