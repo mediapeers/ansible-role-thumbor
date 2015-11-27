@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+  remote_user: root
+  vars:
+    thumbor_signing_key: ABC123def456
+  roles:
+    - ansible-role-thumbor
