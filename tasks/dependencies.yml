@@ -1,0 +1,19 @@
+# Installs all system dependencies for Thumbor (native libs, image manipulation tools)
+
+- name: Install supervisord, python and image libraries / thumbor dependencies
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+    with_items:
+      - supervisor # used to supervise thumbor processes
+      - python-pip # to get the pip package manager
+      - python-dev # needed to build tornado (thumbors webserver) and potentially other python packages
+      - libcurl4-openssl-dev # dependency of pycurl (which is installed by thumbor)
+      # Image libraries:
+      - python-pgmagick
+      - libjpeg-dev
+      - libtiff-dev
+      - libpng-dev
+      - libjasper-dev
+      - libwebp-dev

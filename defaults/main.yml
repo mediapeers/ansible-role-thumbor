@@ -1,2 +1,24 @@
 ---
 # defaults file for ansible-role-thumbor
+
+# General Thumbor settings
+thumbor_signing_key: ABC123 # Overwrite this to make your thumbor secure
+thumbor_aws_plugin_version: 2.0.10
+thumbor_user: ubuntu
+thumbor_config_dir: /etc/thumbor
+thumbor_log_dir: /var/log/thumbor
+thumbor_bucket_prefix: 'my-namespace-'
+# Thumbor result storage (cache) settings
+thumbor_client_side_cache_duration: 30 # in days
+thumbor_result_storage_bucket: 'my-namespace-thumbor-cache'
+thumbor_result_storage_path: result_storage
+thumbor_result_storage_expiration: 24 # in hours
+s3_aws_region: us-east-1
+
+# Supervisor settings
+supervisord_log_dir: /var/log/supervisor
+
+# Nginx settings
+nginx_graylog_server: log.server
+nginx_log_dir: /var/log/nginx
+nginx_status_page: /nginx_status

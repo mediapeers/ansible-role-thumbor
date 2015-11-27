@@ -1,0 +1,64 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+# Thumbor imaging service config file
+# https://github.com/thumbor/thumbor/wiki
+
+# The domains that can have their images resized
+# use an empty list for allow all sources
+ALLOWED_SOURCES = ['{{thumbor_bucket_prefix}}.*s3.amazonaws.com']
+
+# Settings:
+PRESERVE_EXIF_INFO = False
+# Enable this options to specify client-side cache in seconds
+MAX_AGE = 60 * 60 * 24 * {{thumbor_client_side_cache_duration}} # {{thumbor_client_side_cache_duration}} days
+# client-side caching time for temporary images (using queued detectors or after detection errors)
+MAX_AGE_TEMP_IMAGE = 0
+# Sends If-Modified-Since & Last-Modified headers; requires support from result storage
+SEND_IF_MODIFIED_LAST_MODIFIED_HEADERS = False
+
+# the way images are to be loaded
+LOADER = 'thumbor.loaders.http_loader'
+# Use the curl based version of the tornado.httpclient (AsyncHTTP)
+# The normal default loader seems to have problems with SSL certificates!
+HTTP_LOADER_CURL_ASYNC_HTTP_CLIENT = True
+# maximum size of the source image in Kbytes. Use 0 for no limit.
+# THIS ONLY WORKS WITH http_loader.
+MAX_SOURCE_SIZE = 0
+# Disable thumbors upload feature (we don't need it)
+UPLOAD_ENABLED = False
+
+# RESULT STORAGE
+# If you want to cache results, use this options to specify how to cache it
+# Set Expiration seconds to ZERO if you want them not to expire.
+
+# We use th tc_aws package for S3 storage from here: https://github.com/thumbor-community/aws
+# Make sure you have boto config in place, see: https://boto3.readthedocs.org/en/latest/guide/quickstart.html#configuration
+
+# Engine to store results in cache:
+RESULT_STORAGE = 'tc_aws.result_storages.s3_storage'
+# Location on S3:
+TC_AWS_RESULT_STORAGE_BUCKET = '{{thumbor_result_storage_bucket}}'
+TC_AWS_RESULT_STORAGE_ROOT_PATH = '{{thumbor_result_storage_path}}'
+# Cache settings
+RESULT_STORAGE_EXPIRATION_SECONDS = 60 * 60 * {{thumbor_result_storage_expiration}} # {{thumbor_result_storage_expiration}} hours
+# Use reduced redundancy on S3
+TC_AWS_STORAGE_RRS = True
+# Security setting for result storage:
+RESULT_STORAGE_STORES_UNSAFE = False
+TC_AWS_LOADER_BUCKET = False
+TC_AWS_ALLOWED_BUCKETS = False
+# S3 region
+TC_AWS_REGION = '{{ s3_aws_region }}'
+
+# stores the crypto key in each image in the storage
+# this is VERY useful to allow changing the security key
+STORES_CRYPTO_KEY_FOR_EACH_IMAGE = True
+
+# imaging engine to use to process images
+ENGINE = 'thumbor.engines.pil'
+
+# If you enable this, the unencryted URL will be available
+# to users. SHOULD BE FALSE!
+ALLOW_UNSAFE_URL = False
+

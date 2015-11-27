@@ -1,0 +1,61 @@
+# Installs Thumbor and the AWS plugin, and configures thumbor and supervisord
+
+# tc_aws adds S3 storage support to thumbor see https://github.com/thumbor-community/aws
+- name: Install python packages for Thumbor (as tc_aws depends on thumbor we just use that here to pull all requirements)
+  pip:
+    name: tc_aws
+    version: "{{ thumbor_aws_plugin_version }}"
+    state: present
+
+- name: Ensure we have specific version of the pyhon package certifi installed (to make SSL work on Ubuntu 14.04)
+  pip: name=certify state=absent # Uninstall current version
+  # Install last working version with Ubuntu 14.04s version of openssl,
+  # see https://github.com/certifi/python-certifi/issues/26#issuecomment-138334830 for the issue.
+- pip: name=certifi version=2015.04.28 state=present
+
+- name: Create thumbor config directory
+  file:
+    path: "{{ thumbor_config_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0775
+
+- name: Copy thumbor config
+  template:
+  src: thumbor.conf.j2
+  dest: "{{ thumbor_config_dir }}/thumbor.conf"
+  owner: root
+  group: "{{ thumbor_user }}"
+  mode: 0640
+
+- name: Copy thumbor key
+  template:
+    src: thumbor.key.j2
+    dest: "{{ thumbor_config_dir }}/thumbor.key"
+    owner: root
+    group: "{{ thumbor_user }}"
+    mode: 0640
+
+- name: Ensure thumbor log dir exists
+  file:
+    path: "{{ thumbor_log_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Ensure supervisord log dir exists
+  file:
+    path: "{{ supervisord_log_dir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+
+- name: Copy supervisord config file (which spawns the thumbor processes)
+  template:
+    src: supervisord.conf.j2
+    dest: "/etc/supervisor/supervisord.conf"
+  notify:
+    - restart supervisor
