@@ -1,4 +1,4 @@
-Build status
+[![Build Status](https://travis-ci.org/mediapeers/ansible-role-thumbor.svg?branch=master)](https://travis-ci.org/mediapeers/ansible-role-thumbor)
 
 # Thumbor role
 Ansible role that installs (Thumbor)[https://github.com/thumbor/thumbor] and sets it up for production use. It uses supervisord to spawn mulitple Thumbor servper processes and puts 
