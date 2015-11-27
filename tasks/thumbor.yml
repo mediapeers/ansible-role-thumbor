@@ -10,6 +10,7 @@
 
 - name: Ensure we have specific version of the pyhon package certifi installed (to make SSL work on Ubuntu 14.04)
   pip: name=certify state=absent # Uninstall current version
+  ignore_errors: yes
   # Install last working version with Ubuntu 14.04s version of openssl,
   # see https://github.com/certifi/python-certifi/issues/26#issuecomment-138334830 for the issue.
 - pip: name=certifi version=2015.04.28 state=present
