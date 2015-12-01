@@ -19,6 +19,6 @@ s3_aws_region: us-east-1
 supervisord_log_dir: /var/log/supervisor
 
 # Nginx settings
-nginx_graylog_server: log.server
+nginx_graylog_server: localhost
 nginx_log_dir: /var/log/nginx
 nginx_status_page: /nginx_status
