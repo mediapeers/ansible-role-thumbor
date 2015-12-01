@@ -18,7 +18,7 @@ Also you need an AWS S3 bucket setup and the instance this runs on should assume
 This is the list of role variables with their default values:
 
 * `thumbor_signing_key: ABC123` - Overwrite this to make your thumbor secure! Key that's used to sign requests to Thumbor
-* `thumbor_aws_plugin_version: 2.0.10` - Version of the (tc_aws plugin)[https://github.com/thumbor-community/aws] for thumbor
+* `thumbor_aws_plugin_version: 2.0.10` - Version of the [tc_aws plugin](https://github.com/thumbor-community/aws) for thumbor
 * `thumbor_user: ubuntu` - User that runs thumbor (through supervisord)
 * `thumbor_config_dir: /etc/thumbor` - Dir that holds the thumbor config files
 * `thumbor_log_dir: /var/log/thumbor`
@@ -38,6 +38,7 @@ need (such as graylog logging) if you want. Make sure you keep upstream servers 
 
 ## Dependencies
 Depends on the Mediapeers Nginx role, which you can find here: https://github.com/mediapeers/ansible-role-nginx
+Add it as sumodule to your project and make sure it's in `roles/mpx.nginx` to make this role work.
 
 ## Example Playbook
 This is an example on how to integrate this role into your playbook:
