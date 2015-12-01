@@ -25,8 +25,8 @@ nginx_sites:
       - listen 80 default_server
       - keepalive_timeout 5
       - '# Logging to graylog'
-#      - access_log syslog:server={{nginx_graylog_server}}:12301 graylog2_format
-#      - error_log syslog:server={{nginx_graylog_server}}:12302
+      - access_log syslog:server={{nginx_graylog_server}}:12301 graylog2_format
+      - error_log syslog:server={{nginx_graylog_server}}:12302
       - '# Fallback logging'
       - access_log {{nginx_log_dir}}/thumbor.access.log
       - error_log {{nginx_log_dir}}/thumbor.error.log

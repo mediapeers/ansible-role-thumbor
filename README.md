@@ -11,7 +11,8 @@ meaning you can only use the service with knowing the secret signing key. See `t
 
 ## Requirements
 This roles is build for Ubuntu server 14.04 but also might work on other Debian based distros.
-Also you need an AWS S3 bucket setup and the instance this runs on should assume an IAM role (or user credentials in .aws/) to make the AWS plugin work (which uses boto to connect to S3).
+Also you need an AWS S3 bucket setup and the instance this runs on should assume an IAM role (or user credentials in .aws/) to make the
+[AWS plugin](https://github.com/thumbor-community/aws) work (which uses [Boto](https://boto3.readthedocs.org/en/latest/guide/quickstart.html#configuration) to connect to S3).
 
 ## Role Variables
 This is the list of role variables with their default values:
@@ -31,6 +32,9 @@ This is the list of role variables with their default values:
 * `nginx_graylog_server: log.server` - Graylog server for Nginx logs
 * `nginx_log_dir: /var/log/nginx` - Nginx log dir
 * `nginx_status_page: /nginx_status` - Nginx status page you can use for monitoring
+
+There is a config for the Nginx role in `vars/main.yml`. It's set to work with thumbor supervisor setup. But you can throw out stuff you don't
+need (such as graylog logging) if you want. Make sure you keep upstream servers in sync with the ones supervisor starts (thumbor/tornado servers).
 
 ## Dependencies
 Depends on the Mediapeers Nginx role, which you can find here: https://github.com/mediapeers/ansible-role-nginx
