@@ -1,7 +1,6 @@
 ---
 # vars file for ansible-role-thumbor
 
-thumbor_processes: 4 # amount of thumbor processes to spawn
 # Nginx setup:
 nginx_http_params:
   - sendfile on
@@ -18,9 +17,10 @@ nginx_http_params:
   - error_log "{{nginx_log_dir}}/error.log"
 nginx_sites:
   default:
-    upstream:
-      # make sure to update this when spawning more thumbor servers:
-      thumbor: "server 127.0.0.1:8000; server 127.0.0.1:8001; server 127.0.0.1:8002;  server 127.0.0.1:8003;"
+    upstream_group:
+      name: thumbor
+      base_string: "server 127.0.0.1:800$#;"
+      size: "{{ thumbor_processes }}"
     server:
       - listen 80 default_server
       - keepalive_timeout 5

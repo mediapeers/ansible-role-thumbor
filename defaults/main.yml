@@ -17,6 +17,7 @@ s3_aws_region: us-east-1
 
 # Supervisor settings
 supervisord_log_dir: /var/log/supervisor
+thumbor_processes: 4 # amount of thumbor processes to spawn
 
 # Nginx settings
 nginx_graylog_server: localhost
