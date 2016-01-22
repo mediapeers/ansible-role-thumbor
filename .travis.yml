@@ -18,7 +18,7 @@ install:
   # Install Ansible through pip
   - sudo apt-get install -y python-pip python-dev
   - python --version
-  - pip install ansible
+  - sudo -H pip install ansible
   - ansible --version
 
   # Add ansible.cfg to pick up roles path.
@@ -39,5 +39,4 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 
   # Run serverspec
-  - pip list
   - rake spec
