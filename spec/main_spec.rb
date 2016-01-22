@@ -42,7 +42,7 @@ describe 'Thumbor setup' do
     it { should be_installed }
   end
 
-  describe package('tc_aws') do
+  describe package('tc-aws') do
     it { should be_installed.by('pip') }
   end
 
