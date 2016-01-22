@@ -16,8 +16,8 @@
     - libcurl4-openssl-dev # dependency of pycurl (which is installed by thumbor)
     # Image libraries:
     - python-pgmagick
+    - libtiff5-dev
+    - libpng12-dev
     - libjpeg-dev
-    - libtiff-dev
-    - libpng-dev
     - libjasper-dev
     - libwebp-dev
