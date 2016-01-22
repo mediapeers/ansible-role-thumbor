@@ -1,6 +1,6 @@
 ---
 - hosts: localhost
-  remote_user: root
+  become: true
   vars:
     thumbor_signing_key: ABC123def456
   roles:
