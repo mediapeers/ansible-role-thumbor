@@ -9,6 +9,7 @@ env:
 
 before_install:
   - sudo apt-get update -qq
+  - sudo apt-get install -y unzip
 
 install:
   # Install ruby for and serverspec gem
@@ -20,6 +21,10 @@ install:
   - python --version
   - sudo -H pip install ansible
   - ansible --version
+
+  # Add role dependency (mpx.nginx)
+  - cd tests/roles && wget https://github.com/mediapeers/ansible-role-nginx/archive/master.zip && unzip master.zip && cd -
+  - mv tests/roles/ansible-role-nginx-master tests/roles/mpx.nginx
 
   # Add ansible.cfg to pick up roles path.
   - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
