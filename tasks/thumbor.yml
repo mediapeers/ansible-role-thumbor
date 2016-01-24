@@ -23,7 +23,7 @@
     group: root
     mode: 0775
 
-- name: Copy thumbor config
+- name: Create thumbor configuration
   template:
     src: thumbor.conf.j2
     dest: "{{ thumbor_config_dir }}/thumbor.conf"
@@ -31,7 +31,7 @@
     group: "{{ thumbor_user }}"
     mode: 0640
 
-- name: Copy thumbor key
+- name: Add thumbor secret key for signed requests
   template:
     src: thumbor.key.j2
     dest: "{{ thumbor_config_dir }}/thumbor.key"
