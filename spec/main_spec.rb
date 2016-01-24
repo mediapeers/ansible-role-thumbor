@@ -85,12 +85,12 @@ describe 'Thumbor setup' do
     it { should be_file }
   end
 
-  describe file('/etc/nginx/sites-available/default') do
+  describe file('/etc/nginx/sites-available/default.conf') do
     it { should be_file }
     its(:content) { should include "proxy_pass http://thumbor;" }
   end
 
-  describe file('/etc/nginx/sites-enabled/default') do
+  describe file('/etc/nginx/sites-enabled/default.conf') do
     it { should be_symlink }
   end
 
