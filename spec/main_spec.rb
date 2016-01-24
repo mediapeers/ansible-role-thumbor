@@ -60,7 +60,7 @@ describe 'Thumbor setup' do
 
   describe file("#{config_dir}/thumbor.key") do
     it { should be_file }
-    its(:content) { should eq "#{ANSIBLE_VARS.fetch('thumbor_signing_key', 'FAIL')}" }
+    its(:content) { should eq "#{ANSIBLE_VARS.fetch('thumbor_signing_key', 'FAIL')}\n" }
   end
 
   describe file("#{ANSIBLE_VARS.fetch('thumbor_log_dir', 'FAIL')}") do
