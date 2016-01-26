@@ -15,6 +15,19 @@
   # see https://github.com/certifi/python-certifi/issues/26#issuecomment-138334830 for the issue.
 - pip: name=certifi version=2015.04.28 state=present
 
+- name: Create a system group for thumbor user (named after user)
+  group:
+    name: "{{ thumbor_user }}"
+    system: yes
+    state: present
+
+- name: Ensure system user for thumbor existis
+  user:
+    name: "{{ thumbor_user }}"
+    group: "{{ thumbor_user }}"
+    system: yes
+    state: present
+
 - name: Create thumbor config directory
   file:
     path: "{{ thumbor_config_dir }}"
@@ -54,6 +67,11 @@
     owner: root
     group: root
     mode: 0755
+
+- name: Make sure supervisord service is enabled to start on boot
+  service:
+    name: supervisor
+    enabled: yes
 
 - name: Copy supervisord config file (which spawns the thumbor processes)
   template:

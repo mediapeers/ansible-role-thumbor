@@ -4,7 +4,7 @@
 # General Thumbor settings
 thumbor_signing_key: ABC123 # Overwrite this to make your thumbor secure
 thumbor_aws_plugin_version: 2.0.10
-thumbor_user: ubuntu
+thumbor_user: thumbor
 thumbor_config_dir: /etc/thumbor
 thumbor_log_dir: /var/log/thumbor
 thumbor_bucket_prefix: 'my-namespace-'
@@ -20,6 +20,5 @@ supervisord_log_dir: /var/log/supervisor
 thumbor_processes: 4 # amount of thumbor processes to spawn
 
 # Nginx settings
-nginx_graylog_server: localhost
 nginx_log_dir: /var/log/nginx
 nginx_status_page: /nginx_status

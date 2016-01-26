@@ -54,3 +54,4 @@ script:
 
   # Run serverspec
   - sudo rake spec
+  - curl http://localhost/healthcheck | grep -q 'WORKING'
