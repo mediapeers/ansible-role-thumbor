@@ -95,14 +95,6 @@ describe 'Thumbor setup' do
 #    it { should be_running }
   end
 
-  describe port(8001) do
-    it { should be_listening.on('127.0.0.1').with('tcp') }
-  end
-
-  describe port(80) do
-    it { should be_listening.on('127.0.0.1').with('tcp') }
-  end
-
   # Quick smoketest of Nginx setup (nginx role should be tested itself already):
   describe file('/etc/nginx/nginx.conf') do
     it { should be_file }
