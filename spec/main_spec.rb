@@ -100,12 +100,12 @@ describe 'Thumbor setup' do
     it { should be_file }
   end
 
-  describe file('/etc/nginx/sites-available/default.conf') do
+  describe file("/etc/nginx/sites-available/#{ANSIBLE_VARS.fetch('nginx_site_name', 'FAIL')}.conf") do
     it { should be_file }
     its(:content) { should include "proxy_pass http://thumbor;" }
   end
 
-  describe file('/etc/nginx/sites-enabled/default.conf') do
+  describe file("/etc/nginx/sites-enabled/#{ANSIBLE_VARS.fetch('nginx_site_name', 'FAIL')}.conf") do
     it { should be_symlink }
   end
 

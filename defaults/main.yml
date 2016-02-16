@@ -22,3 +22,4 @@ thumbor_processes: 4 # amount of thumbor processes to spawn
 # Nginx settings
 nginx_log_dir: /var/log/nginx
 nginx_status_page: /nginx_status
+nginx_site_name: thumbor

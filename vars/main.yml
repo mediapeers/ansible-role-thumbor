@@ -15,7 +15,8 @@ nginx_http_params:
   - access_log "{{nginx_log_dir}}/access.log"
   - error_log "{{nginx_log_dir}}/error.log"
 nginx_sites:
-  default:
+  -
+    name: '{{ nginx_site_name }}'
     upstream_group:
       name: thumbor
       base_string: "server 127.0.0.1:800$#;"
