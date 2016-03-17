@@ -1,14 +1,14 @@
 ---
 # Installs Thumbor and the AWS plugin, and configures thumbor and supervisord
 
-# The tc_aws thumbor depency doesn't guarantee a specific range of thumbor versions, so this is to work arround this
-# https://github.com/thumbor-community/aws/issues/56
+# The tc_aws thumbor depency doesn't guarantee a specific range of thumbor versions,
+# so this is to work around that issue: https://github.com/thumbor-community/aws/issues/56
 - name: Install specific Thumbor package version (when specific version given)
   pip:
     name: thumbor
     version: "{{ thumbor_specific_version }}"
     state: present
-  when: "{{ thumbor_specific_version }}"
+  when: thumbor_specific_version is defined
 
 # tc_aws adds S3 storage support to thumbor see https://github.com/thumbor-community/aws
 - name: Install python packages for Thumbor (as tc_aws depends on thumbor we just use that here to pull all requirements)
