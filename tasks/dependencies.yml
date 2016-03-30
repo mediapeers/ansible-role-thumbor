@@ -21,3 +21,11 @@
     - libjpeg-dev
     - libjasper-dev
     - libwebp-dev
+
+- name: Create result storage bucket on S3
+  s3:
+    bucket: "{{ thumbor_result_storage_bucket }}"
+    object: "/{{ thumbor_result_storage_path }}"
+    mode: create
+    region: "{{ s3_aws_region }}"
+  when: s3_create_bucket

@@ -20,6 +20,7 @@ thumbor_result_storage_bucket: 'my-namespace-thumbor-cache'
 thumbor_result_storage_path: result_storage
 thumbor_result_storage_expiration: 24 # in hours
 s3_aws_region: us-east-1
+s3_create_bucket: true
 
 # Supervisor settings
 supervisord_log_dir: /var/log/supervisor
