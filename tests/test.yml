@@ -3,5 +3,6 @@
   become: true
   vars:
     thumbor_signing_key: ABC123def456
+    s3_create_bucket: false
   roles:
     - ansible-role-thumbor
