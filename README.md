@@ -30,6 +30,7 @@ This is the list of role variables with their default values:
 * `thumbor_result_storage_path: result_storage` - The path (bucket folder) where results are cached
 * `thumbor_result_storage_expiration: 24` - Result storage cache expiration time in hours
 * `s3_aws_region: us-east-1` - AWS Region for S3 bucket (the aws plugin). If your instance assumes an IAM role you can set this and avoid an boto/aws config file completely
+* `s3_create_bucket: true` - This will create the bucket on S3 unless set to false. Make sure you have a working AWS/Boto config to grant S3 permissions
 * `supervisord_log_dir: /var/log/supervisor` - Log dir for the supervisord service
 * `nginx_graylog_server: log.server` - Graylog server for Nginx logs
 * `nginx_log_dir: /var/log/nginx` - Nginx log dir
