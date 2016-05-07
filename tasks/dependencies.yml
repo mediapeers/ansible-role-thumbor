@@ -22,7 +22,7 @@
     - libjasper-dev
     - libwebp-dev
 
-# This task is better run fromthe Ansible host as it needs a working AWS/Boto setup
+# This task is better run from the Ansible host as it needs a working AWS/Boto setup
 # hence using delegate_to localhost
 - name: Create result storage bucket on S3
   s3:
@@ -30,5 +30,8 @@
     object: "/{{ thumbor_result_storage_path }}"
     mode: create
     region: "{{ s3_aws_region }}"
+  # run on ansible host
   delegate_to: 127.0.0.1
+  # use normal user on ansible host (avoids switching to root)
+  become: false
   when: s3_create_bucket
