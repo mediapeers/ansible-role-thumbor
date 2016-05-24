@@ -40,8 +40,9 @@ There is a config for the Nginx role in `vars/main.yml`. It's set to work with t
 need if you want. Make sure you keep upstream servers in sync with the ones supervisor starts (thumbor/tornado servers).
 
 ## Dependencies
-Depends on the [Mediapeers Nginx](https://galaxy.ansible.com/mediapeers/nginx/) role, which you can find here: https://github.com/mediapeers/ansible-role-nginx
-Add it as sumodule to your project and make sure it's in `roles/mediapeers.nginx` to make this role work.
+Depends on the [mediapeers.nginx](https://galaxy.ansible.com/mediapeers/nginx/) Ansible role. Add the Nginx role to your project
+with the Ansible Galaxy command (`ansible-galaxy install mediapeers.nginx`) or add directly as Git submodule (repo [here](https://github.com/mediapeers/ansible-role-nginx)).
+Make sure it's in `roles/mediapeers.nginx` to make this thumbor role work.
 
 ## Example Playbook
 This is an example on how to integrate this role into your playbook:
