@@ -18,4 +18,4 @@ galaxy_info:
   categories:
   - web
 dependencies:
-  - mpx.nginx
+  - mediapeers.nginx

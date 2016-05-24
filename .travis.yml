@@ -31,9 +31,9 @@ install:
   - sudo -H pip install ansible
   - ansible --version
 
-  # Add role dependency (mpx.nginx)
+  # Add role dependency (mediapeers.nginx)
   - cd tests/roles && wget https://github.com/mediapeers/ansible-role-nginx/archive/master.zip && unzip master.zip && cd -
-  - mv tests/roles/ansible-role-nginx-master tests/roles/mpx.nginx
+  - mv tests/roles/ansible-role-nginx-master tests/roles/mediapeers.nginx
 
   # Add ansible.cfg to pick up roles path.
   - "{ echo '[defaults]'; echo 'roles_path = ../'; } >> ansible.cfg"
