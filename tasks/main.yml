@@ -1,5 +1,5 @@
 ---
-# tasks file for ansible-role-thumbor
+# tasks file for mediapeers.thumbor
 
 - include: dependencies.yml
 - include: thumbor.yml

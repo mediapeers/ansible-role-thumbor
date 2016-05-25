@@ -1,5 +1,5 @@
 ---
-# handlers file for ansible-role-thumbor
+# handlers file for mediapeers.thumbor
 
 - name: restart supervisor
   service:

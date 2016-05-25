@@ -1,5 +1,5 @@
 ---
-# vars file for ansible-role-thumbor
+# vars file for mediapeers.thumbor
 
 # Nginx setup:
 nginx_http_params:

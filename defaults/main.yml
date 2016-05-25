@@ -1,5 +1,5 @@
 ---
-# defaults file for ansible-role-thumbor
+# defaults file for mediapeers.thumbor
 
 # General Thumbor settings
 thumbor_signing_key: ABC123 # Overwrite this to make your thumbor secure

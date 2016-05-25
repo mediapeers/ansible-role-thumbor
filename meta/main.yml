@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Stefan Horning
-  description: A role that installs and sets up Thumbor for production use
+  description: A role that installs and sets up Thumbor for production use, depends on mediapeers.nginx role
   company: Mediapeers GmbH, Berlin
   license: BSD
   min_ansible_version: 1.8
