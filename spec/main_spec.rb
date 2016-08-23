@@ -81,6 +81,12 @@ describe 'Thumbor setup' do
     it { should be_mode(755) }
   end
 
+  describe file("#{ANSIBLE_VARS.fetch('thumbor_storage_path', 'FAIL')}") do
+    it { should be_directory }
+    it { should be_mode(755) }
+    it { should be_owned_by("#{ANSIBLE_VARS.fetch('thumbor_user', 'thumbor')}") }
+  end
+
   describe file("#{ANSIBLE_VARS.fetch('supervisord_log_dir', 'FAIL')}") do
     it { should be_directory }
     it { should be_mode(755) }

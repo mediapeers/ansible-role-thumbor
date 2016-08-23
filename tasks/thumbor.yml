@@ -61,6 +61,14 @@
     group: "{{ thumbor_user }}"
     mode: 0640
 
+- name: Ensure thumbor storage dir exists
+  file:
+    path: "{{ thumbor_storage_path }}"
+    state: directory
+    owner: "{{ thumbor_user }}"
+    group: "{{ thumbor_user }}"
+    mode: 0755
+
 - name: Ensure thumbor log dir exists
   file:
     path: "{{ thumbor_log_dir }}"
