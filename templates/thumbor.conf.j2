@@ -12,7 +12,7 @@ ALLOWED_SOURCES = ['{{thumbor_bucket_prefix}}.*s3.amazonaws.com']
 # Settings:
 PRESERVE_EXIF_INFO = False
 # Enable this options to specify client-side cache in seconds
-MAX_AGE = 60 * 60 * 24 * {{thumbor_client_side_cache_duration}} # {{thumbor_client_side_cache_duration}} days
+MAX_AGE = 60 * 60 * {{thumbor_client_side_cache_duration}} # {{thumbor_client_side_cache_duration}} hours
 # client-side caching time for temporary images (using queued detectors or after detection errors)
 MAX_AGE_TEMP_IMAGE = 0
 # Sends If-Modified-Since & Last-Modified headers; requires support from result storage
@@ -52,7 +52,12 @@ TC_AWS_ALLOWED_BUCKETS = False
 # S3 region
 TC_AWS_REGION = '{{ s3_aws_region }}'
 
-# stores the crypto key in each image in the storage
+# File/Image storage options:
+# for caching orinals from source (not to be confused with result storage)
+STORAGE='thumbor.storages.file_storage'
+STORAGE_EXPIRATION_SECONDS = 60 * 60 * {{ thumbor_storage_expiration }} # {{ thumbor_storage_expiration }} hours
+FILE_STORAGE_ROOT_PATH = '{{ thumbor_storage_path }}'
+# stores the crypto key for each image in the storage
 # this is VERY useful to allow changing the security key
 STORES_CRYPTO_KEY_FOR_EACH_IMAGE = True
 

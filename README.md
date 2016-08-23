@@ -7,6 +7,9 @@ between them and provide a robust webserver for access from the outside.
 
 Also this role expects to use an S3 bucket as result storage and an S3 namespace as allowed image source.
 
+The normal [image storage](https://github.com/thumbor/thumbor/wiki/Image-storage) (source image caching) is done on the normal filesystem. Make sure to set a expiration time that matches your
+scenario to not flood your harddisk. Use the thumbor_storage_expiration variable and point the thumbor_storage_path to a big enough volume.
+
 This role is only designed to setup Thumbor up as an image scaling service. No uploading or other processing will be enabled.
 Also unsafe URLs are disbaled, meaning you can only use the service with knowing the secret signing key. See `thumbor_signing_key` variable.
 
@@ -25,10 +28,12 @@ This is the list of role variables with their default values:
 * `thumbor_config_dir: /etc/thumbor` - Dir that holds the thumbor config files
 * `thumbor_log_dir: /var/log/thumbor`
 * `thumbor_bucket_prefix: 'my-namespace-'` - Prefix for allowed image source S3 buckets
-* `thumbor_client_side_cache_duration: 30` - client side cache duration in days
+* `thumbor_client_side_cache_duration: 24` - client side cache duration in hours
 * `thumbor_result_storage_bucket: 'my-namespace-thumbor-cache'` - The bucket name for the result storage
 * `thumbor_result_storage_path: result_storage` - The path (bucket folder) where results are cached
 * `thumbor_result_storage_expiration: 24` - Result storage cache expiration time in hours
+* `thumbor_storage_expiration: 48` - Source image storage cache expiration time in hours
+* `thumbor_storage_path: /var/tmp/thumbor/storage` - Location for images storage cache, make sure it's on a volume big enough
 * `s3_aws_region: us-east-1` - AWS Region for S3 bucket (the aws plugin). If your instance assumes an IAM role you can set this and avoid an boto/aws config file completely
 * `s3_create_bucket: true` - This will create the bucket on S3 unless set to false. Make sure you have a working AWS/Boto config to grant S3 permissions
 * `supervisord_log_dir: /var/log/supervisor` - Log dir for the supervisord service
