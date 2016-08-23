@@ -19,12 +19,12 @@ thumbor_client_side_cache_duration: 24 # in hours
 # Thumbor result storage (result caching) settings, using s3 storage
 thumbor_result_storage_bucket: 'my-namespace-thumbor-cache'
 thumbor_result_storage_path: result_storage
-thumbor_result_storage_expiration: 120 # in hours
+thumbor_result_storage_expiration: 24 # in hours
 s3_aws_region: us-east-1
 s3_create_bucket: true
 
 # Thumbor image storage (source caching) settings
-thumbor_storage_expiration: 48 # in hours
+thumbor_storage_expiration: 120 # in hours
 thumbor_storage_path: /var/tmp/thumbor/storage
 
 # Supervisor settings
