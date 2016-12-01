@@ -62,7 +62,7 @@ describe 'Thumbor setup' do
     it { should be_owned_by('root') }
     it { should be_grouped_into(ANSIBLE_VARS.fetch('thumbor_user', 'FAIL')) }
     it { should be_mode(640) }
-    its(:content) { should include("#{ANSIBLE_VARS.fetch('thumbor_bucket_prefix', 'FAIL')}.*s3.amazonaws.com") }
+    its(:content) { should include("ALLOWED_SOURCES = ['#{ANSIBLE_VARS.fetch('thumbor_allowed_sources', ['FAIL']).join('\', \'')}']") }
     its(:content) { should include("TC_AWS_REGION = '#{ANSIBLE_VARS.fetch('s3_aws_region', 'FAIL')}'") }
     its(:content) { should include("TC_AWS_RESULT_STORAGE_BUCKET = '#{ANSIBLE_VARS.fetch('thumbor_result_storage_bucket', 'FAIL')}'") }
     its(:content) { should include("FILE_STORAGE_ROOT_PATH = '#{ANSIBLE_VARS.fetch('thumbor_storage_path', 'FAIL')}'") }

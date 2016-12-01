@@ -7,7 +7,7 @@
 
 # The domains that can have their images resized
 # use an empty list for allow all sources
-ALLOWED_SOURCES = [{% for source in thumbor_allowed_sources %}'{{ source }}',{% endfor %}]
+ALLOWED_SOURCES = ['{{ thumbor_allowed_sources|join("', '") }}']
 
 # Settings:
 PRESERVE_EXIF_INFO = False
