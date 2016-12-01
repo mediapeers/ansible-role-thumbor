@@ -45,12 +45,12 @@ script:
   # Run the role/playbook with ansible-playbook.
   - "ansible-playbook -i tests/inventory tests/$SITE --connection=local"
 
-  # Run the role/playbook again, checking to make sure it's idempotent.
+  # Run the role/playbook again, checking to make sure it's idempotent. (allowing one 'change' for apt update)
   - >
     ansible-playbook -i tests/inventory tests/$SITE --connection=local
-#    | grep -q 'changed=0.*failed=0'
-#    && (echo 'Idempotence test: pass' && exit 0)
-#    || (echo 'Idempotence test: fail' && exit 1)
+    | grep -q 'changed=1.*failed=0'
+    && (echo 'Idempotence test: pass' && exit 0)
+    || (echo 'Idempotence test: fail' && exit 1)
 
   # Run serverspec
   - sudo rake spec
