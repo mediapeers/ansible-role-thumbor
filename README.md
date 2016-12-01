@@ -55,7 +55,9 @@ This is an example on how to integrate this role into your playbook:
 - hosts: servers
   vars:
     thumbor_signing_key: 123ABC123Supersecret
-    thumbor_bucket_prefix: "my-company-"
+    thumbor_allowed_sources:
+      - my-s3-namespace-.*s3.amazonaws.com
+      - some-domain.com
     thumbor_result_storage_bucket: "my-result-storage-bucket"
     # and other vars you want to override
   roles:
