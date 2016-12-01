@@ -27,7 +27,7 @@ This is the list of role variables with their default values:
 * `thumbor_user: ubuntu` - User that runs thumbor (through supervisord)
 * `thumbor_config_dir: /etc/thumbor` - Dir that holds the thumbor config files
 * `thumbor_log_dir: /var/log/thumbor`
-* `thumbor_bucket_prefix: 'my-namespace-'` - Prefix for allowed image source S3 buckets
+* `thumbor_allowed_sources: ['my-s3-namespace-.*s3.amazonaws.com','some-domain.com']` - Allowed domains used as Thumbor picture input.
 * `thumbor_client_side_cache_duration: 24` - client side cache duration in hours
 * `thumbor_result_storage_bucket: 'my-namespace-thumbor-cache'` - The bucket name for the result storage
 * `thumbor_result_storage_path: result_storage` - The path (bucket folder) where results are cached

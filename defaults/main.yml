@@ -13,7 +13,9 @@ thumbor_aws_plugin_version: 2.0.10
 thumbor_user: thumbor
 thumbor_config_dir: /etc/thumbor
 thumbor_log_dir: /var/log/thumbor
-thumbor_bucket_prefix: 'my-namespace-'
+thumbor_allowed_sources:
+  - 'my-s3-namespace-.*s3.amazonaws.com'
+  - 'some-domain.com'
 thumbor_client_side_cache_duration: 24 # in hours
 
 # Thumbor result storage (result caching) settings, using s3 storage
