@@ -37,3 +37,4 @@ thumbor_processes: 4 # amount of thumbor processes to spawn
 nginx_log_dir: /var/log/nginx
 nginx_status_page: /nginx_status
 nginx_site_name: thumbor
+nginx_access_log_format: '$remote_addr - $remote_user [$time_local] "$request" $status $body_bytes_sent "$http_referer" "$http_user_agent" real_ip=$http_x_forwarded_for msec=$msec connection=$connection connection_requests=$connection_requests millis=$request_time'
