@@ -46,6 +46,10 @@ describe 'Thumbor setup' do
     it { should be_installed.by('pip') }
   end
 
+  describe package('thumbor') do
+    it { should be_installed.by('pip') }
+  end
+
   describe package('certifi') do
     it { should be_installed.by('pip').with_version('2015.4.28') }
   end
