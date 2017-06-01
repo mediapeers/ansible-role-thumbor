@@ -54,5 +54,5 @@ script:
 
   # Run serverspec
   - sudo rake spec
-  - pip list
+  - pip list --format=column | grep 'thumbor\|boto\|aws\|pip\|tornado'
   - curl -s http://localhost/healthcheck | grep -q 'WORKING'
