@@ -4,12 +4,14 @@
 # General Thumbor settings
 thumbor_signing_key: ABC123 # Overwrite this to make your thumbor secure
 
-# optionally set spefic thumbor version to not rely on tc_aws
-# dependency specification and thus avoid brakage, comment out
-# if you don't mind
-thumbor_specific_version: 5.2.1
+thumbor_aws_plugin_version: 6.0.4
+# Optionally set spefic thumbor version to not rely on tc_aws
+# dependency specification.
+# So before setting this make sure the specified version works
+# with the version of tc_aws set in thumbor_aws_plugin_version,
+# then set it like this:
+# thumbor_specific_version: 6.1.1
 
-thumbor_aws_plugin_version: 2.0.10
 thumbor_user: thumbor
 thumbor_config_dir: /etc/thumbor
 thumbor_log_dir: /var/log/thumbor

@@ -22,8 +22,8 @@ Also you need an AWS S3 bucket setup and the instance this runs on should assume
 This is the list of role variables with their default values:
 
 * `thumbor_signing_key: ABC123` - Overwrite this to make your thumbor secure! Key that's used to sign requests to Thumbor
-* `thumbor_specific_version: 5.2.1` - optional parameter to restrict Thumbor version number more than tc_aws does
-* `thumbor_aws_plugin_version: 2.0.10` - Version of the [tc_aws plugin](https://github.com/thumbor-community/aws) for thumbor
+* `thumbor_specific_version: 6.1.1` - optional parameter to restrict Thumbor version number more than tc_aws does
+* `thumbor_aws_plugin_version: 6.0.4` - Version of the [tc_aws plugin](https://github.com/thumbor-community/aws) for thumbor
 * `thumbor_user: ubuntu` - User that runs thumbor (through supervisord)
 * `thumbor_config_dir: /etc/thumbor` - Dir that holds the thumbor config files
 * `thumbor_log_dir: /var/log/thumbor`
