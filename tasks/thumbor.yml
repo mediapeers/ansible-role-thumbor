@@ -17,6 +17,12 @@
     version: "{{ thumbor_aws_plugin_version }}"
     state: present
 
+# Workarround for https://github.com/thumbor-community/aws/issues/62 , can be deleted once the issue is resolved
+- name: Ensure we have specific version of the pyhon package botocore as newer ones break tc_aws s3 result storage
+  pip: name=botocore state=absent # Uninstall current version
+  ignore_errors: yes
+- pip: name=botocore version=1.3.7 state=present
+
 - name: Ensure we have specific version of the pyhon package certifi installed (to make SSL work on Ubuntu 14.04)
   pip: name=certify state=absent # Uninstall current version
   ignore_errors: yes
