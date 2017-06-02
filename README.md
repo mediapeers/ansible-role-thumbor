@@ -2,19 +2,19 @@
 
 # Thumbor role
 Ansible role that installs [Thumbor](https://github.com/thumbor/thumbor) and sets it up for production use.
-It uses supervisord to spawn mulitple Thumbor server processes and puts Nginx infront of it to loadbalance
+It uses [supervisord](http://supervisord.org/) to spawn mulitple Thumbor server processes and puts Nginx in front of it, to loadbalance
 between them and provide a robust webserver for access from the outside.
 
-Also this role expects to use an S3 bucket as result storage and an S3 namespace as allowed image source.
+Also this role expects to use an S3 bucket as result storage and specific namespace(s) configured as allowed image source.
 
 The normal [image storage](https://github.com/thumbor/thumbor/wiki/Image-storage) (source image caching) is done on the normal filesystem. Make sure to set a expiration time that matches your
 scenario to not flood your harddisk. Use the thumbor_storage_expiration variable and point the thumbor_storage_path to a big enough volume.
 
 This role is only designed to setup Thumbor up as an image scaling service. No uploading or other processing will be enabled.
-Also unsafe URLs are disbaled, meaning you can only use the service with knowing the secret signing key. See `thumbor_signing_key` variable.
+Also unsafe URLs are disabled, meaning you can only use the service with knowing the secret signing key. See `thumbor_signing_key` variable.
 
 ## Requirements
-This roles is build for Ubuntu server 14.04 but also might work on other Debian based distros.
+This role is build for Ubuntu server 14.04 but also might work on other Debian based distros.
 Also you need an AWS S3 bucket setup and the instance this runs on should assume an IAM role (or user credentials in .aws/) to make the
 [AWS plugin](https://github.com/thumbor-community/aws) work (which uses [Boto](https://boto3.readthedocs.org/en/latest/guide/quickstart.html#configuration) to connect to S3).
 
@@ -41,13 +41,13 @@ This is the list of role variables with their default values:
 * `nginx_log_dir: /var/log/nginx` - Nginx log dir
 * `nginx_status_page: /nginx_status` - Nginx status page you can use for monitoring
 
-There is a config for the Nginx role in `vars/main.yml`. It's set to work with thumbor supervisor setup. But you can throw out stuff you don't
-need if you want. Make sure you keep upstream servers in sync with the ones supervisor starts (thumbor/tornado servers).
+There is a config for the Nginx role in `vars/main.yml`. It's set to work with thumbor supervisord setup. But you can throw out stuff you don't
+need if you want. Make sure you keep Nginx upstream server config in sync with the Thumbor server processes started by supervisord.
 
 ## Dependencies
 Depends on the [mediapeers.nginx](https://galaxy.ansible.com/mediapeers/nginx/) Ansible role. Add the Nginx role to your project
 with the Ansible Galaxy command (`ansible-galaxy install mediapeers.nginx`) or add directly as Git submodule (repo [here](https://github.com/mediapeers/ansible-role-nginx)).
-Make sure it's in `roles/mediapeers.nginx` to make this thumbor role work.
+Make sure it's in `roles/mediapeers.nginx` to make this thumbor role works.
 
 ## Example Playbook
 This is an example on how to integrate this role into your playbook:
