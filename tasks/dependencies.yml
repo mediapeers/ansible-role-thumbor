@@ -25,7 +25,7 @@
 # This task is better run from the Ansible host as it needs a working AWS/Boto setup
 # hence using delegate_to localhost
 - name: Create result storage bucket on S3
-  s3:
+  aws_s3:
     bucket: "{{ thumbor_result_storage_bucket }}"
     object: "/{{ thumbor_result_storage_path }}"
     mode: create
