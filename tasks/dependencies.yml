@@ -5,19 +5,28 @@
   apt:
     update_cache: yes
 
-- name: Install supervisord and native library dev packages
+- name: Install native dependencies for Thumbor image manipulation and python package compilation
   apt:
     name: "{{item}}"
     state: present
   with_items:
-    - supervisor # used to supervise thumbor processes
-    - libcurl4-openssl-dev # dependency of pycurl (which is installed by thumbor)
+    # Libraries needed to compile the pycurl package (installed by thumbor):
+    - libcurl4-openssl-dev
+    - libssl-dev
     # Image libraries:
     - libtiff5-dev
     - libpng12-dev
     - libjpeg-dev
     - libjasper-dev
     - libwebp-dev
+
+- name: Install supervisor package on older Ubuntus (where we don't use systemd)
+  apt:
+    name: supervisor
+    state: present
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version < '15.04'
 
 - name: Install Python 2 dependencies
   apt:
