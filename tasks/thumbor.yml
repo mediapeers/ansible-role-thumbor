@@ -85,6 +85,8 @@
     group: root
     mode: 0755
 
+# Supervisord setup
+
 - name: Ensure supervisord log dir exists
   file:
     path: "{{ supervisord_log_dir }}"
@@ -92,15 +94,53 @@
     owner: root
     group: root
     mode: 0755
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version < '15.04'
 
-- name: Make sure supervisord service is enabled to start on boot
+- name: Make sure supervisord service is enabled to start on boot (on older Ubuntus)
   service:
     name: supervisor
     enabled: yes
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version < '15.04'
 
-- name: Copy supervisord config file (which spawns the thumbor processes)
+- name: Setup supervisord config file to starte thumbor processes (on older Ubuntus)
   template:
     src: supervisord.conf.j2
     dest: "/etc/supervisor/supervisord.conf"
   notify:
     - restart supervisor
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version < '15.04'
+
+# Systemd setup
+
+- name: Setup systemd template config to start Thumbor processes (on newer Ubuntus)
+  template:
+    src: thumbor.service.j2
+    dest: /etc/systemd/system/thumbor@.service
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version >= '15.04'
+
+- name: Setup systemd target to start Thumbor processes (on newer Ubuntus)
+  template:
+    src: thumbor.target.j2
+    dest: /etc/systemd/system/thumbor.target
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version >= '15.04'
+
+- name: Make sure enable on systemd service on boot
+  systemd:
+    name: thumbor.target
+    enabled: yes
+    state: restarted
+    daemon_reload: yes
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution_version >= '15.04'
+
