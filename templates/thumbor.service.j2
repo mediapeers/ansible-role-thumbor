@@ -1,0 +1,20 @@
+# {{ ansible_managed }}
+# Thumbor systemd service config
+
+# This file is the template config to start multiple thumbor processes,
+# used by the master unit `thumbor.target`. %i reprenst the call id.
+# For /etc/systemd/system/thumbor@.service
+
+[Unit]
+Description=Thumbor server process %i
+PartOf=thumbor.target
+
+[Service]
+Type=simple
+Restart=on-failure
+
+User={{ thumbor_user }}
+
+SyslogIdentifier=thumbor-%i
+
+ExecStart=/usr/local/bin/thumbor -p 800%i -c {{ thumbor_config_dir }}/thumbor.conf

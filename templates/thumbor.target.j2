@@ -1,0 +1,19 @@
+# {{ ansible_managed }}
+# Systemd master (target) config for starting mulitple Thumbor processes
+# through the template config in thumbor@.service
+#
+# For /etc/systemd/system/thumbor.target
+
+[Unit]
+Description=Thumbor master
+Documentation=http://thumbor.readthedocs.io/en/latest/index.html
+After=network.target
+
+# Starts all subtasks:
+Requires={% for num in range(1,(thumbor_processes+1)) %}thumbor@{{ num }}.service {% endfor %}
+Before=nginx.service
+
+# No service section, will use the required template configs
+
+[Install]
+WantedBy=multi-user.target

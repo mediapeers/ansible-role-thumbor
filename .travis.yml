@@ -45,14 +45,15 @@ script:
   # Run the role/playbook with ansible-playbook.
   - "ansible-playbook -i tests/inventory tests/$SITE --connection=local"
 
-  # Run the role/playbook again, checking to make sure it's idempotent. (allowing 4 'changes' for apt update and pip)
+  # Run the role/playbook again, checking to make sure it's idempotent. (allowing 2 'changes' for apt update and pip)
   - >
     ansible-playbook -i tests/inventory tests/$SITE --connection=local
-    | grep -q 'changed=4.*failed=0'
+    | grep -q 'changed=2.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
 
   # Run serverspec
   - sudo rake spec
+  - which thumbor
   - pip list --format=columns | grep 'thumbor\|boto\|aws\|pip\|tornado'
   - curl -s http://localhost/healthcheck | grep -q 'WORKING'

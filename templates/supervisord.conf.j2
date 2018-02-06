@@ -28,7 +28,7 @@ serverurl=unix:///var/run/supervisor.sock   ; use a unix:// URL for a unix socke
 files = /etc/supervisor/conf.d/*.conf
 
 [program:thumbor]
-command=thumbor -p 800%(process_num)s -c {{thumbor_config_dir}}/thumbor.conf -k {{thumbor_config_dir}}/thumbor.key
+command=thumbor -p 800%(process_num)s -c {{thumbor_config_dir}}/thumbor.conf
 process_name=thumbor800%(process_num)s
 numprocs={{thumbor_processes}}
 user={{thumbor_user}}
