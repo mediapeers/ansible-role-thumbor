@@ -38,7 +38,7 @@
     state: present
   when:
     - ansible_distribution == 'Ubuntu'
-    - ansible_distribution_version < '14.10')
+    - ansible_distribution_version < '14.10'
 
 - name: Create a system group for thumbor user (named after user)
   group:
