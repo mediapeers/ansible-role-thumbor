@@ -31,6 +31,11 @@ s3_create_bucket: true
 thumbor_storage_expiration: 120 # in hours
 thumbor_storage_path: /var/tmp/thumbor/storage
 
+# Statsd metrics reporting settings
+thumbor_statsd_port: 8125
+# set thumbor_statsd_host to enable Thumbors StatsD reporting
+# thumbor_statsd_host: localhost
+
 # Supervisor settings
 supervisord_log_dir: /var/log/supervisor
 thumbor_processes: 4 # amount of thumbor processes to spawn
