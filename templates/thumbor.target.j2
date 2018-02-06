@@ -6,12 +6,12 @@
 
 [Unit]
 Description=Thumbor master
-Wants=nginx.service
+Documentation=http://thumbor.readthedocs.io/en/latest/index.html
+After=network.target
 
 # Starts all subtasks:
 Requires={% for num in range(1,(thumbor_processes+1)) %}thumbor@{{ num }}.service {% endfor %}
-
-After=network.target
+Before=nginx.service
 
 # No service section, will use the required template configs
 
