@@ -59,6 +59,14 @@
     group: "{{ thumbor_user }}"
     mode: 0640
 
+- name: Add thumbor secret key for signed requests
+  template:
+    src: thumbor.key.j2
+    dest: "{{ thumbor_config_dir }}/thumbor.key"
+    owner: root
+    group: "{{ thumbor_user }}"
+    mode: 0640
+
 - name: Ensure thumbor storage dir exists
   file:
     path: "{{ thumbor_storage_path }}"
