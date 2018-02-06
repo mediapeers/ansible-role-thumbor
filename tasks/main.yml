@@ -1,5 +1,5 @@
 ---
 # tasks file for mediapeers.thumbor
 
-- include: dependencies.yml
-- include: thumbor.yml
+- import_tasks: dependencies.yml
+- import_tasks: thumbor.yml
