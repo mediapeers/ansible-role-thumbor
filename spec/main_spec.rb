@@ -73,14 +73,6 @@ describe 'Thumbor setup' do
     its(:content) { should include("FILE_STORAGE_ROOT_PATH = '#{ANSIBLE_VARS.fetch('thumbor_storage_path', 'FAIL')}'") }
   end
 
-  describe file("#{config_dir}/thumbor.key") do
-    it { should be_file }
-    it { should be_owned_by('root') }
-    it { should be_grouped_into(ANSIBLE_VARS.fetch('thumbor_user', 'FAIL')) }
-    it { should be_mode(640) }
-    its(:content) { should eq "#{ANSIBLE_VARS.fetch('thumbor_signing_key', 'FAIL')}\n" }
-  end
-
   describe file("#{ANSIBLE_VARS.fetch('thumbor_log_dir', 'FAIL')}") do
     it { should be_directory }
     it { should be_mode(755) }
