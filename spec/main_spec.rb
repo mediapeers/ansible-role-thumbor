@@ -3,7 +3,9 @@ require 'spec_helper'
 describe 'Thumbor setup' do
 
   describe package('supervisor') do
-    it { should be_installed }
+    if os[:release] < '15.04'
+      it { should be_installed }
+    end
   end
 
   describe package('python-pip') do
@@ -85,19 +87,33 @@ describe 'Thumbor setup' do
   end
 
   describe file("#{ANSIBLE_VARS.fetch('supervisord_log_dir', 'FAIL')}") do
-    it { should be_directory }
-    it { should be_mode(755) }
+    if os[:release] < '15.04'
+      it { should be_directory }
+      it { should be_mode(755) }
+    else
+      it { should_not exist }
+    end
   end
 
   describe file('/etc/supervisor/supervisord.conf') do
-    it { should be_file }
-    its(:content) { should include "numprocs=#{ANSIBLE_VARS.fetch('thumbor_processes', 'FAIL')}" }
-    its(:content) { should include "user=#{ANSIBLE_VARS.fetch('thumbor_user', 'FAIL')}" }
+    if os[:release] < '15.04'
+      it { should be_file }
+      its(:content) { should include "numprocs=#{ANSIBLE_VARS.fetch('thumbor_processes', 'FAIL')}" }
+      its(:content) { should include "user=#{ANSIBLE_VARS.fetch('thumbor_user', 'FAIL')}" }
+    else
+      it { should_not exist }
+    end
   end
 
-  describe service('supervisor') do
-    it { should be_enabled }
-#    it { should be_running }
+  if os[:release] < '15.04'
+    describe service('supervisor') do
+      it { should be_enabled }
+    end
+  else
+    describe service('thumbor') do
+      it { should be_enabled }
+      it { should be_running }
+    end
   end
 
   # Quick smoketest of Nginx setup (nginx role should be tested itself already):

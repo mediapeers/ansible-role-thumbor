@@ -9,6 +9,9 @@ set :backend, :exec
 # internal role params
 INSIDE_ROLE=true
 
+
+STDOUT.puts "OS info collected by Serverspec: #{os[:family]} #{os[:release]} - #{os[:arch]}"
+
 # Getting the ansible variables from included vars_files and
 # playbook vars to be usable in the tests
 vars_files = ["defaults/main.yml", "vars/main.yml"]
