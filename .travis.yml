@@ -17,7 +17,7 @@ install:
   # Install Ansible through pip
   - sudo apt-get install -y python-pip python-dev
   - python --version
-  - pip install ansible
+  - sudo -H pip install ansible
   - ansible --version
 
   # Add role dependency (mediapeers.nginx)
