@@ -1,34 +1,23 @@
 ---
 sudo: required
-dist: trusty
+dist: xenial
 # Do not use the travis languague setups (install ruby/python manually) for ansible tests!
 language: shell
-
-env:
-  - SITE=test.yml
 
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -y unzip
-  # Clean up all the weird rubies (none coming from apt packages) from system
-  - sudo rm /usr/bin/ruby /usr/bin/gem
-  - sudo rm -r /home/travis/.rvm/
-
 
 install:
   # Install ruby for and serverspec gem as root
-  - sudo apt-get install -y ruby2.0
-  - sudo ln -s /usr/bin/ruby2.0 /usr/bin/ruby
-  - sudo ln -s /usr/bin/gem2.0 /usr/bin/gem
-  - sudo ln -s /usr/bin/rake2.0 /usr/bin/rake
-
+  - sudo apt-get install -y ruby
   - sudo ruby -v
   - sudo gem install serverspec
 
   # Install Ansible through pip
   - sudo apt-get install -y python-pip python-dev
   - python --version
-  - sudo -H pip install ansible
+  - pip install ansible
   - ansible --version
 
   # Add role dependency (mediapeers.nginx)
@@ -40,14 +29,14 @@ install:
 
 script:
   # Check the role/playbook's syntax.
-  - "ansible-playbook -i tests/inventory tests/$SITE --syntax-check"
+  - "ansible-playbook -i tests/inventory tests/test.yml --syntax-check"
 
   # Run the role/playbook with ansible-playbook.
-  - "ansible-playbook -i tests/inventory tests/$SITE --connection=local"
+  - "ansible-playbook -i tests/inventory tests/test.yml --connection=local"
 
   # Run the role/playbook again, checking to make sure it's idempotent. (allowing 2 'changes' for apt update and pip)
   - >
-    ansible-playbook -i tests/inventory tests/$SITE --connection=local
+    ansible-playbook -i tests/inventory tests/test.yml --connection=local
     | grep -q 'changed=2.*failed=0'
     && (echo 'Idempotence test: pass' && exit 0)
     || (echo 'Idempotence test: fail' && exit 1)
@@ -57,3 +46,6 @@ script:
   - which thumbor
   - pip list --format=columns | grep 'thumbor\|boto\|aws\|pip\|tornado'
   - curl -s http://localhost/healthcheck | grep -q 'WORKING'
+
+notifications:
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
