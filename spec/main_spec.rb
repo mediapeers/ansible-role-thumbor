@@ -53,7 +53,11 @@ describe 'Thumbor setup' do
   end
 
   describe package('certifi') do
-    it { should be_installed.by('pip').with_version('2015.4.28') }
+    if os[:release] < '15.04'
+      it { should be_installed.by('pip').with_version('2015.4.28') }
+    else
+      it { should_not be_installed.by('pip') }
+    end
   end
 
   describe user(ANSIBLE_VARS.fetch('thumbor_user', 'FAIL')) do
@@ -110,7 +114,7 @@ describe 'Thumbor setup' do
       it { should be_enabled }
     end
   else
-    describe service('thumbor') do
+    describe service('thumbor.target') do
       it { should be_enabled }
       it { should be_running }
     end
