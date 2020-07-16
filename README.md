@@ -1,3 +1,5 @@
+**Moved to https://github.com/mediafellows/ansible-role-thumbor**
+
 [![Build Status](https://travis-ci.com/mediapeers/ansible-role-thumbor.svg?branch=master)](https://travis-ci.com/mediapeers/ansible-role-thumbor)
 
 # Thumbor role
